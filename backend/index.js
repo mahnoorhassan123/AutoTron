@@ -2,22 +2,31 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const authRouter = require('./routes/authRouter')
+const authRouter = require('./routes/authRouter');
+const productRouter = require('./routes/productRouter');
 
 require('dotenv').config();
-require('./models/db');
+const connectDB = require('./models/db'); // Import the database connection
 
-const PORT= process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
-
-app.get('/ping', (req, res) => {
-    res.send('PONG');
-})
-
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/auth', authRouter);
 
+// Test Route
+app.get('/ping', (req, res) => {
+  res.send('PONG');
+});
+
+// Routes
+app.use('/auth', authRouter);
+app.use('/api', productRouter);
+
+// Connect to MongoDB
+connectDB(); // Call the connection function only once
+
+// Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`)
-})
+  console.log(`Server is running on ${PORT}`);
+});
