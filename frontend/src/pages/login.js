@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import React, { useState } from "react";
 import { handleError, handleSuccess } from "../utils";
+import { ToastContainer } from "react-toastify";
 
 function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -13,47 +13,45 @@ function Login() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    const copyLoginInfo = {...loginInfo};
+    const copyLoginInfo = { ...loginInfo };
     copyLoginInfo[name] = value;
     setLoginInfo(copyLoginInfo);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const {email, password} = loginInfo;
+    const { email, password } = loginInfo;
     if (!email || !password) {
       return handleError('Email and password are required');
     }
-    try{
+    try {
       const url = "http://localhost:8080/auth/login";
       const response = await fetch(url, {
         method: "POST",
-        headers:{
-          'Content-Type': 'application/json'
+        headers: {
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(loginInfo)
+        body: JSON.stringify(loginInfo),
       });
       const result = await response.json();
-      const {success, message, jwtToken, name, error} = result;
-      if(success){
+      const { success, message, jwtToken, name, error } = result;
+      if (success) {
         handleSuccess(message);
         localStorage.setItem('token', jwtToken);
         localStorage.setItem('loggedInUser', name);
-        setTimeout(()=>{
-          navigate('/home')
-        }, 1000)
+        setTimeout(() => {
+          navigate('/products'); // Correct redirection to /products
+        }, 1000);
       } else if (error) {
-        const details = error?.details[0].message;
+        const details = error?.details[0]?.message || "An error occurred";
         handleError(details);
       } else if (!success) {
         handleError(message);
       }
-      console.log(result);
     } catch (err) {
-      handleError(err);
+      handleError(err.message || "An unexpected error occurred");
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -61,13 +59,13 @@ function Login() {
       <form onSubmit={handleLogin}>
         <div>
           <label htmlFor="email">Email</label>
-          <input 
+          <input
             onChange={handleChange}
-            type="email" 
-            name="email" 
+            type="email"
+            name="email"
             placeholder="Enter your email..."
-            value={loginInfo.email} />
-            
+            value={loginInfo.email}
+          />
         </div>
 
         <div>
