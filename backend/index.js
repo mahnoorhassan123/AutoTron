@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRouter = require('./routes/authRouter');
 const productRouter = require('./routes/productRouter');
+const orderRouter = require('./routes/orderRouter');
+
 
 require('dotenv').config();
 const connectDB = require('./models/db'); // Import the database connection
@@ -22,6 +24,7 @@ app.get('/ping', (req, res) => {
 // Routes
 app.use('/auth', authRouter);
 app.use('/api', productRouter);
+app.use('/api/orders', orderRouter);
 
 // Connect to MongoDB
 connectDB(); // Call the connection function only once

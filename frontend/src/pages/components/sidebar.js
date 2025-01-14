@@ -4,6 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText, Box } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import StoreIcon from "@mui/icons-material/Store";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 function Sidebar() {
   const location = useLocation(); // Tracks the current route
@@ -84,7 +85,25 @@ function Sidebar() {
           </ListItemIcon>
           <ListItemText primary="Products" />
         </ListItem>
+        <ListItem
+        button
+        component={Link}
+        to="/order" // New route for the Orders page
+        sx={{
+          backgroundColor: isActive("/orders") ? "#1ABC9C" : "transparent",
+          borderRadius: "5px",
+          "&:hover": {
+            backgroundColor: "#1ABC9C",
+          },
+        }}
+      >
+        <ListItemIcon sx={{ color: "#fff" }}>
+          <LocalShippingIcon /> {/* Icon for Order page */}
+        </ListItemIcon>
+        <ListItemText primary="Orders" /> {/* Label for the Order page */}
+      </ListItem>
       </List>
+      
     </Box>
   );
 }
