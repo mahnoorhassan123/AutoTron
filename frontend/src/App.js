@@ -5,6 +5,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import Dashboard from "./pages/dashboard";
 import Analytics from "./pages/analytics";
+import VendorProfile from "./pages/adminProfile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/products" element={<CrudProducts />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/profile" element={<VendorProfile />} />
       </Routes>
   );
 }
