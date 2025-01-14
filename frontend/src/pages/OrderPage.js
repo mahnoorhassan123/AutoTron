@@ -51,10 +51,10 @@ const OrderManagement = () => {
           )
         );
       } else {
-        setError("Failed to update order status.");
+        setError("Failed to update order status");
       }
     } catch (err) {
-      setError("Error updating order status. Please try again.");
+      setError("Error updating order status.Please try again.");
     } finally {
       setLoading(false);
     }
