@@ -1,7 +1,13 @@
-// src/components/Header.js
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate("/profile");
+  };
+
   return (
     <header
       style={{
@@ -13,7 +19,7 @@ function Header() {
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         borderBottom: "2px solid #34495E",
         zIndex: 1,
-        position: "sticky", // Keeps it at the top
+        position: "sticky",
         top: 0,
       }}
     >
@@ -41,6 +47,7 @@ function Header() {
         }}
         onMouseEnter={(e) => (e.target.style.backgroundColor = "#1ABC9C")}
         onMouseLeave={(e) => (e.target.style.backgroundColor = "#34495E")}
+        onClick={handleProfileClick}
       >
         User Profile
       </div>
