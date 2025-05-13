@@ -1,4 +1,3 @@
-// routes/vendorProfile.js
 const express = require("express");
 const router = express.Router();
 const {
@@ -6,7 +5,7 @@ const {
   updateVendorProfile,
   createVendorProfile,
 } = require("../controllers/profileController");
-const { validateVendorProfile } = require("../middlewares/errorHandler");
+const { validateVendorProfile } = require("../middlewares/profileValidation");
 
 // Get a vendor profile by ID
 router.get("/profile/:vendorId", getVendorProfile);

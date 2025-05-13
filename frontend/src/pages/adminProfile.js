@@ -141,7 +141,7 @@ const VendorProfile = ({ vendorId }) => {
                   onChange={handleChange}
                   style={styles.checkbox}
                 />
-                Enable Cash on Delivery
+                Enable Cash 
               </label>
             </div>
           </div>

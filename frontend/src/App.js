@@ -9,6 +9,7 @@ import Analytics from "./pages/analytics";
 import OrderPage from "./pages/OrderPage";
 
 import VendorProfile from "./pages/adminProfile";
+import AddRecommendation from "./pages/recommendations";
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <Route path="/order" element={<OrderPage />} />
 
         <Route path="/profile" element={<VendorProfile />} />
-
+        <Route path="/recommendation" element={<AddRecommendation />} />
       </Routes>
   );
 }

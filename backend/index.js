@@ -6,6 +6,8 @@ const authRouter = require('./routes/authRouter');
 const productRouter = require('./routes/productRouter');
 const orderRouter = require('./routes/orderRouter');
 
+const profileRouter = require('./routes/profileRouter');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 require('dotenv').config();
 const connectDB = require('./models/db'); // Import the database connection
@@ -26,6 +28,8 @@ app.use('/auth', authRouter);
 app.use('/api', productRouter);
 app.use('/api/orders', orderRouter);
 
+app.use('/api', profileRouter);
+app.use('/api', recommendationRoutes);
 // Connect to MongoDB
 connectDB(); // Call the connection function only once
 

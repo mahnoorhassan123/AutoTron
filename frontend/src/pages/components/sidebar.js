@@ -102,6 +102,24 @@ function Sidebar() {
         </ListItemIcon>
         <ListItemText primary="Orders" /> {/* Label for the Order page */}
       </ListItem>
+
+        <ListItem
+          button
+          component={Link}
+          to="/recommendation"
+          sx={{
+            backgroundColor: isActive("/recommendation") ? "#1ABC9C" : "transparent",
+            borderRadius: "5px",
+            "&:hover": {
+              backgroundColor: "#1ABC9C",
+            },
+          }}
+        >
+          <ListItemIcon sx={{ color: "#fff" }}>
+            <StoreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Recommendations" />
+        </ListItem>
       </List>
       
     </Box>
