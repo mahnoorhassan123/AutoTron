@@ -6,6 +6,7 @@ import Signup from './pages/signup';
 import Dashboard from "./pages/dashboard";
 import Analytics from "./pages/analytics";
 import VendorProfile from "./pages/adminProfile";
+import AddRecommendation from "./pages/recommendations";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/profile" element={<VendorProfile />} />
+        <Route path="/recommendation" element={<AddRecommendation />} />
       </Routes>
   );
 }
