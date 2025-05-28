@@ -1,3 +1,4 @@
+// backend/models/productModel.js
 const mongoose = require('mongoose');
 
 // Define the Product schema
@@ -18,9 +19,18 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hungerCategory: {
+    type: String,
+    enum: ['low', 'medium', 'high'], // 👈 Required for AI logic
+    required: true,
+  },
   stock: {
     type: Number,
     default: 0,
+  },
+  image: {
+    type: String,
+    default: '', // Optional: for image URL
   },
   createdAt: {
     type: Date,

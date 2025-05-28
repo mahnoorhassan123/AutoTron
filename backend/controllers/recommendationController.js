@@ -1,28 +1,30 @@
-const { getUserById } = require('../models/userModel');
+const Product = require('../models/productModel');
 
-const getRecommendations = (req, res) => {
-  const { userId, hungerLevel } = req.body;
+const getRecommendations = async (req, res) => {
+  const { hungerLevel, priceRange } = req.body;
 
-  const user = getUserById(userId);
+  let hungerCategory = '';
+  if (hungerLevel <= 3) hungerCategory = 'low';
+  else if (hungerLevel <= 7) hungerCategory = 'medium';
+  else hungerCategory = 'high';
 
-  // Simulated AI logic
-  const foodRecommendations = {
-    low: ['Fruit Salad', 'Yogurt', 'Smoothie'],
-    medium: ['Chicken Wrap', 'Grilled Sandwich', 'Rice Bowl'],
-    high: ['Burger', 'Pizza', 'Biryani'],
-  };
+  try {
+    // Build query filter
+    const query = {
+      hungerCategory,
+      price: { $gte: priceRange.min, $lte: priceRange.max }
+    };
 
-  let selected = [];
-  if (hungerLevel <= 3) selected = foodRecommendations.low;
-  else if (hungerLevel <= 7) selected = foodRecommendations.medium;
-  else selected = foodRecommendations.high;
+    const products = await Product.find(query);
 
-  res.json({
-    userId,
-    userName: user?.name || 'Anonymous',
-    hungerLevel,
-    recommendations: selected,
-  });
+    // Return only product names (or you can send full product data if needed)
+    const recommendations = products.map(p => p.name);
+
+    res.json({ recommendations });
+  } catch (error) {
+    console.error('Error fetching recommendations:', error);
+    res.status(500).json({ message: 'Server error fetching recommendations' });
+  }
 };
 
 module.exports = { getRecommendations };
